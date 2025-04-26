@@ -1,5 +1,7 @@
 import React from 'react';
 import { BsBagFill, BsNutFill, BsTrashFill, BsHospitalFill, BsFlower1, BsFileTextFill } from 'react-icons/bs';
+import { FaLaptop } from 'react-icons/fa';
+
 import '../components/css/Dashboard.css';
 
 function Dashboard() {
@@ -41,6 +43,11 @@ function Dashboard() {
         <div className="category">
           <BsFileTextFill size={50} />
           <span>Papel</span>
+          <br />
+        </div>
+        <div className="category">
+        <FaLaptop size={50} />
+          <span>Eletrônico</span>
           <br />
         </div>
         

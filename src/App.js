@@ -10,8 +10,6 @@ import Dashboard from './pages/dasboard';
 import Footer from './components/Footer';
 
 
-
-
 function App() {
   return (
     <BrowserRouter>

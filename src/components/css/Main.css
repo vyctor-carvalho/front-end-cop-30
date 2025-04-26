@@ -84,30 +84,47 @@ main {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1478px) {
+    main {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .left, .center, .rigth {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+    }
+  
+    .left {
+      order: 1; 
+      display: flex;
+      justify-content: center;
+      height: 200px;
+    }
+  
+    .left img {
+      width: 250px;
+      margin-bottom: 20px;
+      position: static;
+    }
   
     .center {
-      flex-direction: column;
-      gap: 40px;
-      margin-top: 60px;
+      gap: 20px;
+      margin-top: 20px;
     }
+  
+    .box {
+      width: 80%;
+      height: 200px;
+    }
+  
     .txt {
-        font-size: 15pt;
+      font-size: 15pt;
     }
-
-
   }
 
 
-@media (max-width: 1478px) {
-    main {
-        .rigth img {
-            display: none;
-        }
-
-    
-}
-    }
   
 
 

@@ -1,27 +1,38 @@
-import React from 'react';
-import './css/Header.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import imageUnama from '../img/image2.png'
+import './css/Header.css';
+import imageUnama from '../img/image2.png';
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="header">
-      
-      <div className="site-name">
-        <Link to="/"><h1><span>run</span>dev</h1></Link>
-      </div>
+      <div className="header-container">
 
-      <div className="logo">
-        <img src={imageUnama} alt="Unama logo" />
-      </div>
+        <div className="site-name">
+          <Link to="/">
+            <h1><span>run</span>dev</h1>
+          </Link>
+        </div>
 
-      <nav className="nav">
-        <Link to="/registration">CADASTRO</Link>
-        <Link to="/login">LOGIN</Link>
-        {/* <button className='downloadBtn' onClick={handleDownload}>
-          Baixar Documento
-        </button> */}
-      </nav>
+        <div className="logo">
+          <img src={imageUnama} alt="Unama logo" />
+        </div>
+
+        <nav className={`nav ${menuOpen ? 'open' : ''}`}>
+          <Link to="/registration" onClick={() => setMenuOpen(false)}>Cadastro</Link>
+          <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
+          <a href="/docs/doc.pdf" download="doc.pdf" onClick={() => setMenuOpen(false)}>Sobre</a>
+        </nav>
+
+        <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+          <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
+          <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
+          <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
+        </div>
+
+      </div>
     </header>
   );
 }
