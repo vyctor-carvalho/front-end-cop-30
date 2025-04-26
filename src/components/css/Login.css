@@ -1,0 +1,77 @@
+.login-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'poppins';
+  }
+  
+  .login-container h2 {
+    color: #175338;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-top: 20px;
+
+  }
+ 
+  .login-form label {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 16pt;
+    color: #0c3221;
+
+    
+  }
+  
+  .login-form input {
+    width: 100%;
+    margin: 10px 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 17pt;
+  }
+  
+  .login-form button {
+    width: 100%;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 16pt;
+  }
+  
+  .login-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .esqueci-senha {
+    padding: 20px;
+    color: #0056b3;
+  }
+  
+  .esqueci-senha:hover {
+    text-decoration:underline;
+    color: #0056b3;
+  }
+
+  .form-footer {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+
+  }
