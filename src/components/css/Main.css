@@ -3,6 +3,7 @@ main {
     align-items: center;
     justify-content: space-around;
     width: 100%;
+    height: 67vh;
 
 }
 
@@ -10,7 +11,7 @@ main {
     display: flex;
     justify-content: space-around;
     gap: 20px;
-    height: 60vh;
+
     align-items: center;
 }
 
@@ -107,6 +108,10 @@ main {
       width: 250px;
       margin-bottom: 20px;
       position: static;
+    }
+
+    .rigth {
+        display: none;
     }
   
     .center {
