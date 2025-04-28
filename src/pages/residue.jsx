@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../components/css/residue.css'; // Importa o CSS novo
+import '../components/css/residue.css';
 
 const WasteClassifier = () => {
   const [file, setFile] = useState(null);

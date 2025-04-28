@@ -36,7 +36,7 @@ function Dashboard() {
           <BsFlower1 size={50} />
           <span>Orgânico</span>
             <br />
-            <p>aqui nao pode</p>
+            <p></p>
       
         </div>
 
