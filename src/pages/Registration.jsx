@@ -54,19 +54,19 @@ useEffect(() => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const payload = {
-      registration: Number(formData.registration), // Garantindo que seja número
+      registration: Number(formData.registration),
       name: formData.name,
-      age: Number(formData.age), // Garantindo que seja número
+      age: Number(formData.age),
       semester: formData.semester,
       shift: formData.shift,
       className: formData.className,
-      unit: { id: Number(formData.unitId) }, // Verifique se o backend espera um objeto unit com id
+      unit: { id_unit: Number(formData.unitId) }, // <-- corrigido para id_unit
       password: formData.password,
       role: formData.role
     };
-
+  
     try {
       const response = await fetch('http://localhost:8080/auth/register', {
         method: 'POST',
@@ -75,18 +75,18 @@ useEffect(() => {
         },
         body: JSON.stringify(payload)
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         console.log('Cadastro feito com sucesso:', data);
-        // Aqui poderia limpar o form ou redirecionar
+        // Limpar form ou redirecionar se quiser
       } else {
         console.error('Erro no cadastro:', response.statusText);
       }
     } catch (error) {
       console.error('Erro ao conectar com a API:', error);
     }
-  };
+  };  
 
   return (
     <div className="cadastro-container">

@@ -27,16 +27,14 @@ const WasteClassifier = () => {
   const [amountKg, setAmountKg] = useState('');
   const [registration, setRegistration] = useState('');
   const [unit, setUnit] = useState('');
-  const [unitOptions, setUnitOptions] = useState([]);  // Estado para armazenar as unidades disponíveis
+  const [unitOptions, setUnitOptions] = useState([]);
+  const [lastPayload, setLastPayload] = useState(null); // <-- Aqui adiciona!
 
   useEffect(() => {
-    // Chamada à API para buscar as unidades disponíveis
     const fetchUnits = async () => {
       try {
-        const token = localStorage.getItem('token');  // Obtendo o token
-        console.log(token);
+        const token = localStorage.getItem('token');
 
-        // Verificando se o token existe antes de fazer a requisição
         if (!token) {
           alert("Token de autenticação não encontrado.");
           return;
@@ -44,11 +42,11 @@ const WasteClassifier = () => {
 
         const response = await axios.get('http://localhost:8080/resisted/units/getunit', {
           headers: {
-            'Authorization': `Bearer ${token}`  // Adicionando o token no cabeçalho da requisição
+            'Authorization': `Bearer ${token}`
           }
         });
 
-        setUnitOptions(response.data);  // Supondo que a resposta seja um array de unidades
+        setUnitOptions(response.data);
       } catch (error) {
         console.error('Erro ao buscar unidades:', error);
         alert('Erro ao carregar as unidades.');
@@ -56,7 +54,7 @@ const WasteClassifier = () => {
     };
 
     fetchUnits();
-  }, []);  // A chamada à API ocorre apenas uma vez, quando o componente for montado
+  }, []);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -103,28 +101,40 @@ const WasteClassifier = () => {
     }
   };
 
+  const wasteTypeMap = {
+    'Plástico': 1,
+    'Metal': 2,
+    'Papel': 3,
+    'Orgânico': 4,
+    'Eletrônico': 5,
+    'Hospitalar': 6,
+  };
+  
   const handleSaveWaste = async () => {
-    if (!result || !registration || !unit || !amountKg) {
+    if (!result || !registration || !amountKg) {
       alert('Preencha todos os campos!');
       return;
     }
 
+    const wasteTypeId = wasteTypeMap[result.class];
+
     const payload = {
-      amountKg,
+      amountKg: amountKg.toString(),
       student: {
         registration: Number(registration),
-        unit: {
-          idUnit: Number(unit)  // Se no seu backend o objeto Unit tem ID
-        }
+        unit: null,
       },
       typeWasteResidue: {
-        name: result.class
+        id: wasteTypeId
       }
     };
+    
+    
+
+    console.log('Payload enviado:', payload);
+    setLastPayload(payload); // salva o payload pra mostrar na tela
 
     const token = localStorage.getItem('token');
-    console.log(token);
-
     if (!token) {
       alert("Token de autenticação não encontrado.");
       return;
@@ -134,14 +144,14 @@ const WasteClassifier = () => {
       const response = await axios.post('http://localhost:8080/resisted/waste-residues', payload, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
+          'Authorization': `Bearer ${token}`,
+        },
       });
 
       console.log('Resíduo registrado com sucesso:', response.data);
       alert('Resíduo registrado com sucesso!');
     } catch (error) {
-      console.error('Erro ao registrar resíduo:', error);
+      console.error('Erro ao registrar resíduo:', error.response ? error.response.data : error);
       alert('Erro ao registrar resíduo.');
     }
   };
@@ -203,7 +213,7 @@ const WasteClassifier = () => {
                 ))}
               </select>
             </label>
-            
+
             <label>
               <input
                 className='input'
@@ -213,13 +223,21 @@ const WasteClassifier = () => {
                 onChange={(e) => setAmountKg(e.target.value)}
               />
             </label>
-            
+
             <div className="form-footer">
               <button onClick={handleSaveWaste} className="waste-btn">
                 Registrar Resíduo
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Exibe o JSON enviado */}
+      {lastPayload && (
+        <div className="payload-display">
+          <h2>JSON enviado:</h2>
+          <pre>{JSON.stringify(lastPayload, null, 2)}</pre>
         </div>
       )}
     </div>

@@ -54,12 +54,18 @@ function Dashboard() {
         wasteData.forEach((waste) => {
           totalWasteCount++;
           totalWeight += waste.amountKg;
-
-          const category = waste.typeWasteResidue.name.toLowerCase();
-          if (categoryCount[category] !== undefined) {
-            categoryCount[category]++;
+        
+          const categoryName = waste?.typeWasteResidue?.name;
+          if (categoryName) {
+            const category = categoryName.toLowerCase();
+            if (categoryCount[category] !== undefined) {
+              categoryCount[category]++;
+            }
+          } else {
+            console.warn('Resíduo sem tipo encontrado:', waste);
           }
         });
+        
 
         // Calculando o resíduo mais descartado
         const mostDiscardedCategory = Object.keys(categoryCount).reduce((a, b) =>
